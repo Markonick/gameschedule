@@ -38,7 +38,6 @@ namespace GameSchedule.Helpers
             var apiPassword = Configuration.GetValue<string>("MYSPORTSFEEDS_PASSWORD");
             var seasonName = apiSettings.GetValue<string>("SEASON_NAME");
             var gameScheduleUrl = apiSettings.GetValue<string>("GAMESCHEDULE_URL");
-            var interval = apiSettings.GetValue<int>("API_REQUEST_INTERVAL_MS");
             var format = apiSettings.GetValue<string>("FORMAT");
 
             var databaseConfiguration = Configuration.GetSection("DatabaseConfiguration");

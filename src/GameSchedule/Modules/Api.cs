@@ -11,6 +11,11 @@ namespace GameSchedule.Modules
             {
                  return await repo.GetAllGamesAsync();
             });
+
+            Get("api/todaysgameschedule", async args =>
+            {
+                return await repo.GetTodaysGamesAsync();
+            });
         }
     }
 }

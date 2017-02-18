@@ -52,5 +52,17 @@ namespace GameSchedule.Repositories
 
             return  jsonResult;
         }
+
+        public async Task<dynamic> GetTodaysGamesAsync()
+        {
+            var db = _client.GetDatabase(_databaseName);
+            var collection = db.GetCollection<Gameentry>(_collectionName);
+            var result = collection.Find(z => true).ToList();
+            var jsonResult = JsonConvert.SerializeObject(result);
+
+            await Task.Delay(10);
+
+            return jsonResult;
+        }
     }
 }
