@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using GameSchedule.Models;
 using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
@@ -45,6 +46,7 @@ namespace GameSchedule.Repositories
         {
             var db =  _client.GetDatabase(_databaseName);
             var collection =  db.GetCollection<Gameentry>(_collectionName);
+
             var result =  collection.Find(z => true).ToList();
             var jsonResult = JsonConvert.SerializeObject(result);
 
@@ -53,14 +55,18 @@ namespace GameSchedule.Repositories
             return  jsonResult;
         }
 
-        public async Task<dynamic> GetTodaysGamesAsync()
+        public  dynamic GetTodaysGamesAsync()
         {
             var db = _client.GetDatabase(_databaseName);
             var collection = db.GetCollection<Gameentry>(_collectionName);
-            var result = collection.Find(z => true).ToList();
+
+            var today = DateTime.Today.AddDays(-2).ToString("yyyy-MM-dd");
+            var filter = Builders<Gameentry>.Filter.Eq("date", today);
+            
+            var result = collection.Find(filter).ToList();
             var jsonResult = JsonConvert.SerializeObject(result);
 
-            await Task.Delay(10);
+            //await Task.Delay(10);
 
             return jsonResult;
         }

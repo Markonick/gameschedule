@@ -8,6 +8,6 @@ namespace GameSchedule.Repositories
     {
         void StoreGameSchedule(dynamic response);
         Task<dynamic> GetAllGamesAsync();
-        Task<dynamic> GetTodaysGamesAsync();
+        dynamic GetTodaysGamesAsync();
     }
 }
